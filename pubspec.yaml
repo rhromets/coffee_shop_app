@@ -23,6 +23,17 @@ flutter:
 
   uses-material-design: true
 
-  # assets:
-    # - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
+    - assets/icons/
 
+  fonts:
+    - family: Sora
+      fonts:
+      - asset: fonts/Sora-Regular.ttf
+      - asset: fonts/Sora-Bold.ttf
+      - asset: fonts/Sora-Light.ttf
+
+    - family: NewAmsterdam
+      fonts:
+      - asset: fonts/NewAmsterdam-Regular.ttf
