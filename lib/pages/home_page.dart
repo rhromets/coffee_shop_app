@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                             text: 'Bilzen, Tanjungbalai',
                             color: Colors.white,
                           ),
-                          const SizedBox(width: 10),
+                          const SizedBox(width: 4),
                           SvgPicture.asset(
                             'assets/icons/drop-down-arrow.svg',
                             width: 18,
@@ -66,21 +66,21 @@ class HomePage extends StatelessWidget {
                               child: TextField(
                                 style: const TextStyle(
                                   color: kGreyColor,
-                                  letterSpacing: 1.2,
                                   fontWeight: FontWeight.w300,
+                                  fontSize: 14,
                                 ),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Search coffee',
                                   hintStyle: const TextStyle(
                                     color: kGreyColor,
-                                    letterSpacing: 1.2,
                                     fontWeight: FontWeight.w300,
+                                    fontSize: 14,
                                   ),
                                   icon: SvgPicture.asset(
                                     'assets/icons/search.svg',
-                                    width: 24,
-                                    height: 24,
+                                    width: 20,
+                                    height: 20,
                                     fit: BoxFit.contain,
                                     colorFilter: const ColorFilter.mode(
                                       Colors.white,
@@ -102,6 +102,8 @@ class HomePage extends StatelessWidget {
                             ),
                             child: SvgPicture.asset(
                               'assets/icons/filter.svg',
+                              width: 20,
+                              height: 20,
                               colorFilter: const ColorFilter.mode(
                                 Colors.white,
                                 BlendMode.srcIn,
@@ -141,6 +143,7 @@ class HomePage extends StatelessWidget {
                               child: const RegularText(
                                 text: 'Promo',
                                 color: Colors.white,
+                                isBold: true,
                               ),
                             ),
                             const SizedBox(height: 6),
@@ -175,7 +178,7 @@ class HomePage extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     physics: const BouncingScrollPhysics(),
                     children: [
-                      buildCoffeeSelectedTag('All coffee'),
+                      buildCoffeeSelectedTag('All Coffee'),
                       buildCoffeeTag('Machiato'),
                       buildCoffeeTag('Latte'),
                       buildCoffeeTag('Americano'),
@@ -184,8 +187,26 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                const CoffeeCard(),
+                const SizedBox(height: 16),
+                SizedBox(
+                  height: 310,
+                  child: GridView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 1),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                      childAspectRatio: 160 / 240,
+                    ),
+                    itemCount: 6,
+                    itemBuilder: (context, index) {
+                      return const Center(
+                        child: CoffeeCard(),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -216,6 +237,7 @@ class HomePage extends StatelessWidget {
       child: RegularText(
         text: name,
         color: Colors.white,
+        isBold: true,
       ),
     );
   }

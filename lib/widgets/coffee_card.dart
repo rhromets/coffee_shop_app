@@ -35,8 +35,8 @@ class CoffeeCard extends StatelessWidget {
                 children: [
                   Container(
                     alignment: Alignment.centerRight,
-                    width: 55,
-                    height: 30,
+                    width: 51,
+                    height: 28,
                     decoration: const BoxDecoration(
                       color: Color.fromARGB(125, 49, 49, 49),
                       borderRadius: BorderRadius.only(
@@ -47,11 +47,10 @@ class CoffeeCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(),
                         SvgPicture.asset(
                           'assets/icons/star-filled.svg',
-                          width: 16,
-                          height: 16,
+                          width: 12,
+                          height: 12,
                           fit: BoxFit.contain,
                         ),
                         const SizedBox(width: 4),
@@ -59,8 +58,8 @@ class CoffeeCard extends StatelessWidget {
                           '4.8',
                           style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
@@ -100,6 +99,7 @@ class CoffeeCard extends StatelessWidget {
                 child: const Icon(
                   Icons.add,
                   color: Colors.white,
+                  size: 16,
                 ),
               )
             ],

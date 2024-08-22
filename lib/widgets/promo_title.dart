@@ -17,7 +17,7 @@ class PromoTitle extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: 19,
+            top: 12,
             left: 0,
             child: Container(
               height: 27,
@@ -38,7 +38,7 @@ class PromoTitle extends StatelessWidget {
               color: Colors.white,
               fontSize: 32,
               fontWeight: FontWeight.w600,
-              letterSpacing: 2.2,
+              height: 1.1,
             ),
           ),
         ],

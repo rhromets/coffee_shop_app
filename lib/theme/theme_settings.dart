@@ -3,4 +3,5 @@ import 'package:coffee_shop_app/constants/colors.dart';
 
 final ThemeData themeSettings = ThemeData(
   scaffoldBackgroundColor: kWhiteLightColor,
+  fontFamily: 'Sora',
 );

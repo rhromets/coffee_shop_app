@@ -33,4 +33,5 @@ flutter:
       fonts:
       - asset: fonts/Sora-Regular.ttf
       - asset: fonts/Sora-Bold.ttf
+      - asset: fonts/Sora-SemiBold.ttf
       - asset: fonts/Sora-Light.ttf
