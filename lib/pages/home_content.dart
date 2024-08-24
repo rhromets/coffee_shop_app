@@ -1,13 +1,56 @@
+import 'dart:convert';
 import 'package:coffee_shop_app/constants/constants.dart';
+import 'package:coffee_shop_app/fetch_data/coffee.dart';
 import 'package:coffee_shop_app/widgets/coffee_card.dart';
 import 'package:coffee_shop_app/widgets/promo_title.dart';
 import 'package:coffee_shop_app/widgets/widgets.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:http/http.dart' as http;
 
-class HomeContent extends StatelessWidget {
+class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
+
+  @override
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
+  List<Coffee> list = [];
+
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
+  var url = Uri.https('raw.githubusercontent.com',
+      '/rhromets/mock_json_data/main/coffee_fake_api.json');
+
+  Future _fetchData() async {
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        setState(() {
+          list = (json.decode(response.body) as List)
+              .map((data) => Coffee.fromJson(data))
+              .toList();
+        });
+      } else {
+        throw Exception('Failed to load projects');
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      throw Exception('General Error Exception');
+    }
+  }
+
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      _refreshIndicatorKey.currentState?.show();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,44 +219,53 @@ class HomeContent extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 32,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      physics: const BouncingScrollPhysics(),
-                      children: [
-                        buildCoffeeSelectedTag('All Coffee'),
-                        buildCoffeeTag('Machiato'),
-                        buildCoffeeTag('Latte'),
-                        buildCoffeeTag('Americano'),
-                        buildCoffeeTag('Americano'),
-                        buildCoffeeTag('Americano'),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    height: 310,
-                    child: GridView.builder(
-                      padding: const EdgeInsets.symmetric(vertical: 1),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 8.0,
-                        mainAxisSpacing: 8.0,
-                        childAspectRatio: 160 / 240,
+              child: RefreshIndicator(
+                key: _refreshIndicatorKey,
+                onRefresh: _fetchData,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 32,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        children: [
+                          buildCoffeeSelectedTag('All Coffee'),
+                          buildCoffeeTag('Machiato'),
+                          buildCoffeeTag('Latte'),
+                          buildCoffeeTag('Americano'),
+                          buildCoffeeTag('Espresso'),
+                          buildCoffeeTag('Corretto'),
+                        ],
                       ),
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
-                        return const Center(
-                          child: CoffeeCard(),
-                        );
-                      },
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 310,
+                      child: GridView.builder(
+                        padding: const EdgeInsets.symmetric(vertical: 1),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 8.0,
+                          mainAxisSpacing: 8.0,
+                          childAspectRatio: 160 / 240,
+                        ),
+                        itemCount: list.length,
+                        itemBuilder: (context, index) {
+                          return CoffeeCard(
+                            name: list[index].name,
+                            price: list[index].price,
+                            raiting: list[index].raiting,
+                            imageUrl: list[index].imageUrl,
+                            cardSubtitle: list[index].cardSubtitle,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
