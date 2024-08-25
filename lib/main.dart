@@ -1,4 +1,5 @@
-import 'package:coffee_shop_app/pages/home_page.dart';
+import 'package:coffee_shop_app/pages/coffee_detail_page.dart';
+// import 'package:coffee_shop_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'theme/theme_settings.dart';
 
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Coffe Shop App',
       theme: themeSettings,
-      home: const HomePage(),
+      home: const CoffeeDetailPage(),
+      // home: const HomePage(),
     );
   }
 }

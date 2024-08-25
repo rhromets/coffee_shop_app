@@ -1,5 +1,4 @@
 import 'package:coffee_shop_app/constants/constants.dart';
-import 'package:coffee_shop_app/pages/coffee_list_page.dart';
 import 'package:coffee_shop_app/pages/home_content.dart';
 import 'package:coffee_shop_app/pages/nav_screens.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class _HomePageState extends State<HomePage> {
       const HomeContent(),
       const NavScreen1(),
       const NavScreen2(),
-      const CoffeeListPage(),
+      const NavScreen3(),
     ];
   }
 
