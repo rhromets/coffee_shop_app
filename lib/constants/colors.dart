@@ -10,4 +10,4 @@ const kGreyLightColor = Color(0xFFF5F5F5);
 const kPromoColor = Color(0xFFED5151);
 const kDarkSecondaryColor = Color(0xFF2A2A2A);
 const kYellowColor = Color(0xFFFBBE21);
-
+const kOnboardBackgroundColor = Color(0xFF050505);

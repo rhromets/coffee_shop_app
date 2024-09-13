@@ -6,6 +6,7 @@ class RegularText extends StatelessWidget {
   final double size;
   final double height;
   final bool isBold;
+  final TextAlign? tAlign;
 
   const RegularText({
     super.key,
@@ -14,12 +15,14 @@ class RegularText extends StatelessWidget {
     this.color = const Color(0xFF313131),
     this.height = 1.4,
     this.isBold = false,
+    this.tAlign,
   });
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: tAlign,
       style: TextStyle(
         color: color,
         fontSize: size,
